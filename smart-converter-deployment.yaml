@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smart-converter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: smart-converter
+  template:
+    metadata:
+      labels:
+        app: smart-converter
+    spec:
+      containers:
+      - name: smart-converter
+        image: # Replace with your Artifact Registry path
+        volumeMounts:
+        - name: pubsub-key
+          mountPath: /secrets
+          readOnly: true
+        env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /secrets/key.json
+      volumes:
+      - name: pubsub-key
+        secret:
+          secretName: pubsub-key

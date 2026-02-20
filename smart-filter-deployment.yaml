@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smart-filter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: smart-filter
+  template:
+    metadata:
+      labels:
+        app: smart-filter
+    spec:
+      containers:
+        - name: smart-filter
+          image: # Replace with your Artifact Registry path
+          volumeMounts:
+            - name: pubsub-key
+              mountPath: /secrets
+              readOnly: true
+          env:
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /secrets/key.json
+      volumes:
+        - name: pubsub-key
+          secret:
+            secretName: pubsub-key
