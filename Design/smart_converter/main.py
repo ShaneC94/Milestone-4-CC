@@ -1,10 +1,11 @@
 from google.cloud import pubsub_v1
 import json
+import os
 
 project_id = ""
 
-input_subscription = "labelTopic-filtered-sub"
-output_topic = "labelTopic-processed"
+input_subscription = "filtered-sub"
+output_topic = "converted-topic"
 
 subscriber = pubsub_v1.SubscriberClient()
 publisher = pubsub_v1.PublisherClient()
