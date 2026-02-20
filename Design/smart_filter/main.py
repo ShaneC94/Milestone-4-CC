@@ -4,8 +4,8 @@ import os
 
 project_id = ""
 
-input_subscription = "labelTopic-sub"
-output_topic = "labelTopic-filtered"
+input_subscription = "raw-sub"
+output_topic = "filtered-topic"
 
 subscriber = pubsub_v1.SubscriberClient()
 publisher = pubsub_v1.PublisherClient()
